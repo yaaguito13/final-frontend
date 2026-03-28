@@ -23,7 +23,9 @@ public class AuthRepository {
     }
 
     public void register(String name, String email, String password, Callback<ResponseBody> callback) {
-        RegisterRequest request = new RegisterRequest(name, email, password);
+        // Truco: Pasamos el 'email' tanto a 'username' como a 'email'.
+        // Así Django guardará el email como username y funcionará el authenticate() del Login.
+        RegisterRequest request = new RegisterRequest(email, email, password);
         apiService.registrarUsuario(request).enqueue(callback);
     }
 }

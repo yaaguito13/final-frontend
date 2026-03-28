@@ -43,7 +43,11 @@ public class LoginViewModel extends ViewModel {
                 if (response.isSuccessful() && response.body() != null) {
                     loginSuccess.setValue(response.body().getId());
                 } else {
-                    loginError.setValue("Credenciales incorrectas");
+                    try {
+                        loginError.setValue("Error " + response.code() + ": " + response.errorBody().string());
+                    } catch (Exception e) {
+                        loginError.setValue("Credenciales incorrectas");
+                    }
                 }
             }
 

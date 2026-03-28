@@ -48,7 +48,11 @@ public class RegisterViewModel extends ViewModel {
                 if (response.isSuccessful()) {
                     registerSuccess.setValue(true);
                 } else {
-                    registerError.setValue("Error en el registro. Verifica los datos.");
+                    try {
+                        registerError.setValue("Error " + response.code() + ": " + response.errorBody().string());
+                    } catch (Exception e) {
+                        registerError.setValue("Error en el registro. Verifica los datos.");
+                    }
                 }
             }
 

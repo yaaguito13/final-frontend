@@ -37,8 +37,18 @@ public class CategoriaAdapter extends RecyclerView.Adapter<CategoriaAdapter.View
         
         holder.tvNombre.setText(categoria.getNombre() != null ? categoria.getNombre().toUpperCase() : "");
 
+        String imageUrl = categoria.getImagenUrl();
+        if (imageUrl != null) {
+            imageUrl = imageUrl.trim();
+            if (imageUrl.contains("127.0.0.1")) {
+                imageUrl = imageUrl.replace("127.0.0.1", "10.0.2.2");
+            } else if (imageUrl.contains("localhost")) {
+                imageUrl = imageUrl.replace("localhost", "10.0.2.2");
+            }
+        }
+
         Glide.with(holder.itemView.getContext())
-                .load(categoria.getImagenUrl())
+                .load(imageUrl)
                 .placeholder(android.R.drawable.ic_menu_gallery)
                 .error(android.R.drawable.ic_menu_report_image)
                 .into(holder.ivIcon);

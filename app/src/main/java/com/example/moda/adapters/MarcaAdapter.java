@@ -38,13 +38,20 @@ public class MarcaAdapter extends RecyclerView.Adapter<MarcaAdapter.ViewHolder> 
         holder.tvNombreMarca.setText(marca.getNombre());
         holder.tvRating.setText("★ " + marca.getRating());
 
-        // Mostrar solo inicial si el logo no carga
-        if (marca.getNombre() != null && !marca.getNombre().isEmpty()) {
-            holder.tvLogoText.setText(String.valueOf(marca.getNombre().charAt(0)).toUpperCase());
+
+
+        String imageUrl = marca.getImagenFondoUrl();
+        if (imageUrl != null) {
+            imageUrl = imageUrl.trim();
+            if (imageUrl.contains("127.0.0.1")) {
+                imageUrl = imageUrl.replace("127.0.0.1", "10.0.2.2");
+            } else if (imageUrl.contains("localhost")) {
+                imageUrl = imageUrl.replace("localhost", "10.0.2.2");
+            }
         }
 
         Glide.with(holder.itemView.getContext())
-                .load(marca.getImagenFondoUrl())
+                .load(imageUrl)
                 .placeholder(android.R.drawable.ic_menu_gallery)
                 .into(holder.ivLogo);
     }
@@ -56,14 +63,13 @@ public class MarcaAdapter extends RecyclerView.Adapter<MarcaAdapter.ViewHolder> 
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView ivLogo;
-        TextView tvNombreMarca, tvRating, tvLogoText;
+        TextView tvNombreMarca, tvRating;
 
         ViewHolder(View itemView) {
             super(itemView);
             ivLogo = itemView.findViewById(R.id.ivLogoMarca);
             tvNombreMarca = itemView.findViewById(R.id.tvNombreMarca);
             tvRating = itemView.findViewById(R.id.tvRatingMarca);
-            tvLogoText = itemView.findViewById(R.id.tvLogoText);
         }
     }
 }

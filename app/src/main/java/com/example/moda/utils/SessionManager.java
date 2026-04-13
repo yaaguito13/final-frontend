@@ -26,6 +26,26 @@ public class SessionManager {
         return prefs.getInt(KEY_USER_ID, -1);
     }
 
+    public void saveCredentials(String email, String password) {
+        editor.putString("saved_email", email);
+        editor.putString("saved_password", password);
+        editor.apply();
+    }
+
+    public void clearCredentials() {
+        editor.remove("saved_email");
+        editor.remove("saved_password");
+        editor.apply();
+    }
+
+    public String getSavedEmail() {
+        return prefs.getString("saved_email", "");
+    }
+
+    public String getSavedPassword() {
+        return prefs.getString("saved_password", "");
+    }
+
     // Limpia la sesión al hacer logout
     public void clearSession() {
         editor.clear();

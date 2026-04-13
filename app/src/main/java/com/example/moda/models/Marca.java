@@ -1,9 +1,13 @@
 package com.example.moda.models;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Marca {
     private int id;
     private String nombre;
     private String logo_url;
+    
+    @SerializedName("imagen")
     private String imagen_fondo_url;
     private String descripcion;
     private double rating;

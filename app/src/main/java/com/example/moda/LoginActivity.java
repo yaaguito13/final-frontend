@@ -17,6 +17,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText etEmail, etPassword;
     private Button btnLogin;
     private TextView tvRegister;
+    private android.widget.CheckBox cbRememberMe;
     private SessionManager sessionManager;
     private LoginViewModel loginViewModel;
 
@@ -34,14 +35,27 @@ public class LoginActivity extends AppCompatActivity {
         etPassword = findViewById(R.id.etPassword);
         btnLogin = findViewById(R.id.btnLogin);
         tvRegister = findViewById(R.id.tvRegister);
+        cbRememberMe = findViewById(R.id.cbRememberMe);
 
         // Resaltar "Regístrate" (negrita, subrayado y color negro)
         tvRegister.setText(android.text.Html.fromHtml("¿NO TIENES CUENTA? <b><u><font color='#000000'>Regístrate</font></u></b>", android.text.Html.FROM_HTML_MODE_LEGACY));
 
+        // Rellenar credenciales guardadas si existen
+        String savedEmail = sessionManager.getSavedEmail();
+        String savedPassword = sessionManager.getSavedPassword();
+        if (!savedEmail.isEmpty() && !savedPassword.isEmpty()) {
+            etEmail.setText(savedEmail);
+            etPassword.setText(savedPassword);
+            cbRememberMe.setChecked(true);
+        }
+
+        /*
         // Si ya hay sesión iniciada, ir directo a Home
+        // Lo comentamos para que siempre pida iniciar sesión, tal y como solicitaste.
         if (sessionManager.getUserId() != -1) {
             goToHome();
         }
+        */
 
         // Observadores
         setupObservers();
@@ -49,6 +63,13 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(v -> {
             String email = etEmail.getText().toString().trim();
             String password = etPassword.getText().toString().trim();
+            
+            if (cbRememberMe.isChecked()) {
+                sessionManager.saveCredentials(email, password);
+            } else {
+                sessionManager.clearCredentials();
+            }
+            
             loginViewModel.login(email, password);
         });
         

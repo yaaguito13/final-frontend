@@ -2,9 +2,9 @@ package com.example.moda.repositories;
 
 import com.example.moda.api.ApiClient;
 import com.example.moda.api.ApiService;
-import com.example.moda.models.Categoria;
-import com.example.moda.models.Marca;
-import com.example.moda.models.Producto;
+import com.example.moda.models.CategoriaResponse;
+import com.example.moda.models.MarcaResponse;
+import com.example.moda.models.ProductoResponse;
 
 import java.util.List;
 
@@ -18,15 +18,15 @@ public class HomeRepository {
         apiService = ApiClient.getClient().create(ApiService.class);
     }
 
-    public void getCategorias(Callback<List<Categoria>> callback) {
+    public void getCategorias(Callback<CategoriaResponse> callback) {
         apiService.getCategorias().enqueue(callback);
     }
 
-    public void getMarcas(Callback<List<Marca>> callback) {
+    public void getMarcas(Callback<MarcaResponse> callback) {
         apiService.getMarcas().enqueue(callback);
     }
 
-    public void getProductos(Callback<List<Producto>> callback) {
+    public void getProductos(Callback<ProductoResponse> callback) {
         apiService.getProductos().enqueue(callback);
     }
 }

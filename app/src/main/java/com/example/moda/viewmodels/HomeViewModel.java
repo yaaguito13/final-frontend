@@ -5,8 +5,11 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.moda.models.Categoria;
+import com.example.moda.models.CategoriaResponse;
 import com.example.moda.models.Marca;
+import com.example.moda.models.MarcaResponse;
 import com.example.moda.models.Producto;
+import com.example.moda.models.ProductoResponse;
 import com.example.moda.repositories.HomeRepository;
 
 import java.util.List;
@@ -43,11 +46,11 @@ public class HomeViewModel extends ViewModel {
     }
 
     private void cargarCategorias() {
-        repository.getCategorias(new Callback<List<Categoria>>() {
+        repository.getCategorias(new Callback<CategoriaResponse>() {
             @Override
-            public void onResponse(Call<List<Categoria>> call, Response<List<Categoria>> response) {
-                if (response.isSuccessful()) {
-                    categorias.setValue(response.body());
+            public void onResponse(Call<CategoriaResponse> call, Response<CategoriaResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    categorias.setValue(response.body().getCategorias());
                 } else {
                     error.setValue("Error cargando categorías");
                 }
@@ -55,7 +58,7 @@ public class HomeViewModel extends ViewModel {
             }
 
             @Override
-            public void onFailure(Call<List<Categoria>> call, Throwable t) {
+            public void onFailure(Call<CategoriaResponse> call, Throwable t) {
                 error.setValue(t.getMessage());
                 loading.setValue(false);
             }
@@ -63,36 +66,36 @@ public class HomeViewModel extends ViewModel {
     }
 
     private void cargarMarcas() {
-        repository.getMarcas(new Callback<List<Marca>>() {
+        repository.getMarcas(new Callback<MarcaResponse>() {
             @Override
-            public void onResponse(Call<List<Marca>> call, Response<List<Marca>> response) {
-                if (response.isSuccessful()) {
-                    marcas.setValue(response.body());
+            public void onResponse(Call<MarcaResponse> call, Response<MarcaResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    marcas.setValue(response.body().getMarcas());
                 } else {
                     error.setValue("Error cargando marcas");
                 }
             }
 
             @Override
-            public void onFailure(Call<List<Marca>> call, Throwable t) {
+            public void onFailure(Call<MarcaResponse> call, Throwable t) {
                 error.setValue(t.getMessage());
             }
         });
     }
 
     private void cargarProductos() {
-        repository.getProductos(new Callback<List<Producto>>() {
+        repository.getProductos(new Callback<ProductoResponse>() {
             @Override
-            public void onResponse(Call<List<Producto>> call, Response<List<Producto>> response) {
-                if (response.isSuccessful()) {
-                    productos.setValue(response.body());
+            public void onResponse(Call<ProductoResponse> call, Response<ProductoResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    productos.setValue(response.body().getProductos());
                 } else {
                     error.setValue("Error cargando productos");
                 }
             }
 
             @Override
-            public void onFailure(Call<List<Producto>> call, Throwable t) {
+            public void onFailure(Call<ProductoResponse> call, Throwable t) {
                 error.setValue(t.getMessage());
             }
         });

@@ -1,10 +1,16 @@
 package com.example.moda.models;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Producto {
     private int id;
     private String nombre;
     private double precio;
+    
+    @SerializedName("imagen")
     private String imagen_url;
+    
+    @SerializedName("marca")
     private String marca_nombre;
     private double rating;
 

@@ -40,8 +40,18 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
         holder.tvPrecio.setText(String.format("%.2f €", producto.getPrecio()));
         holder.tvRating.setText("★ " + producto.getRating());
 
+        String imageUrl = producto.getImagenUrl();
+        if (imageUrl != null) {
+            imageUrl = imageUrl.trim();
+            if (imageUrl.contains("127.0.0.1")) {
+                imageUrl = imageUrl.replace("127.0.0.1", "10.0.2.2");
+            } else if (imageUrl.contains("localhost")) {
+                imageUrl = imageUrl.replace("localhost", "10.0.2.2");
+            }
+        }
+
         Glide.with(holder.itemView.getContext())
-                .load(producto.getImagenUrl())
+                .load(imageUrl)
                 .placeholder(android.R.drawable.ic_menu_gallery)
                 .into(holder.ivProducto);
     }

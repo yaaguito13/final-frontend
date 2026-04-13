@@ -3,9 +3,9 @@ package com.example.moda.api;
 import com.example.moda.models.LoginRequest;
 import com.example.moda.models.LoginResponse;
 import com.example.moda.models.RegisterRequest;
-import com.example.moda.models.Categoria;
-import com.example.moda.models.Marca;
-import com.example.moda.models.Producto;
+import com.example.moda.models.CategoriaResponse;
+import com.example.moda.models.MarcaResponse;
+import com.example.moda.models.ProductoResponse;
 
 import java.util.List;
 
@@ -24,11 +24,11 @@ public interface ApiService {
     Call<ResponseBody> registrarUsuario(@Body RegisterRequest request);
 
     @GET("categorias/")
-    Call<List<Categoria>> getCategorias();
+    Call<CategoriaResponse> getCategorias();
 
     @GET("marcas/")
-    Call<List<Marca>> getMarcas();
+    Call<MarcaResponse> getMarcas();
 
     @GET("productos/")
-    Call<List<Producto>> getProductos();
+    Call<ProductoResponse> getProductos();
 }

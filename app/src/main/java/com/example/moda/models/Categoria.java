@@ -1,8 +1,12 @@
 package com.example.moda.models;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Categoria {
     private int id;
     private String nombre;
+    
+    @SerializedName("imagen")
     private String imagen_url;
 
     public int getId() { return id; }

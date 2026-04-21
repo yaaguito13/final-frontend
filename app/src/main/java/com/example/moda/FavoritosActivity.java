@@ -1,5 +1,6 @@
 package com.example.moda;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -49,6 +50,11 @@ public class FavoritosActivity extends AppCompatActivity {
         com.example.moda.utils.NavigationUtils.setupBottomNav(this, com.example.moda.utils.NavigationUtils.MENU_FAVORITOS);
 
         btnBack.setOnClickListener(v -> finish());
+
+        findViewById(R.id.ivCart).setOnClickListener(v -> {
+            Intent intent = new Intent(this, CarritoActivity.class);
+            startActivity(intent);
+        });
 
         if (usuarioId != -1) {
             cargarFavoritos();

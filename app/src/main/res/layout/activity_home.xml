@@ -47,11 +47,15 @@
             </LinearLayout>
 
             <ImageView
+                android:id="@+id/ivCart"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:background="@drawable/bg_button_black" />
+                android:background="@drawable/bg_button_black"
+                android:src="@drawable/ic_bag_outline"
+                android:padding="10dp"
+                app:tint="#FFFFFF" />
         </RelativeLayout>
 
         <!-- Search Bar -->

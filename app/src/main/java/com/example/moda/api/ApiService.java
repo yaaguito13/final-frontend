@@ -49,4 +49,13 @@ public interface ApiService {
 
     @POST("carrito/")
     Call<ResponseBody> addCarrito(@Body CarritoRequest request);
+
+    @GET("carrito/")
+    Call<com.example.moda.models.CarritoResponse> getCarrito(@retrofit2.http.Query("usuario_id") int usuarioId);
+
+    @retrofit2.http.PUT("carrito/{item_id}/")
+    Call<ResponseBody> updateCarrito(@retrofit2.http.Path("item_id") int itemId, @Body com.example.moda.models.UpdateQuantityRequest request);
+
+    @retrofit2.http.DELETE("carrito/{item_id}/")
+    Call<ResponseBody> deleteCarrito(@retrofit2.http.Path("item_id") int itemId);
 }

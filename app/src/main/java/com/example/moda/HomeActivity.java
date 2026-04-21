@@ -33,6 +33,11 @@ public class HomeActivity extends AppCompatActivity {
 
         com.example.moda.utils.NavigationUtils.setupBottomNav(this, com.example.moda.utils.NavigationUtils.MENU_INICIO);
 
+        findViewById(R.id.ivCart).setOnClickListener(v -> {
+            Intent intent = new Intent(this, CarritoActivity.class);
+            startActivity(intent);
+        });
+
         // Lanzar las 3 llamadas paralelas
         viewModel.cargarDatosHome();
     }

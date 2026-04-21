@@ -38,8 +38,14 @@ public interface ApiService {
     @GET("productos/{producto_id}/")
     Call<Producto> getProducto(@retrofit2.http.Path("producto_id") int productoId);
 
+    @GET("favoritos/")
+    Call<com.example.moda.models.FavoritoResponse> getFavoritos(@retrofit2.http.Query("usuario_id") int usuarioId);
+
     @POST("favoritos/")
     Call<ResponseBody> addFavorito(@Body FavoritoRequest request);
+
+    @retrofit2.http.DELETE("favoritos/{producto_id}/")
+    Call<ResponseBody> deleteFavorito(@retrofit2.http.Path("producto_id") int productoId, @retrofit2.http.Query("usuario_id") int usuarioId);
 
     @POST("carrito/")
     Call<ResponseBody> addCarrito(@Body CarritoRequest request);

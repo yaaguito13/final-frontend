@@ -31,6 +31,8 @@ public class HomeActivity extends AppCompatActivity {
         setupRecyclerViews();
         setupObservers();
 
+        com.example.moda.utils.NavigationUtils.setupBottomNav(this, com.example.moda.utils.NavigationUtils.MENU_INICIO);
+
         // Lanzar las 3 llamadas paralelas
         viewModel.cargarDatosHome();
     }

@@ -201,6 +201,8 @@ public class ProductDetailActivity extends AppCompatActivity {
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.isSuccessful()) {
                     Toast.makeText(ProductDetailActivity.this, "Añadido a favoritos", Toast.LENGTH_SHORT).show();
+                    btnFavorite.setBackgroundResource(R.drawable.bg_round_black);
+                    btnFavorite.setColorFilter(android.graphics.Color.WHITE);
                 } else {
                     Toast.makeText(ProductDetailActivity.this, "Error al añadir a favoritos", Toast.LENGTH_SHORT).show();
                 }

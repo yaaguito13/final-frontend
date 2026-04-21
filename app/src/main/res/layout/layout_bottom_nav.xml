@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/bottomNavF"
+    android:layout_width="match_parent"
+    android:layout_height="72dp"
+    android:layout_alignParentBottom="true"
+    android:orientation="horizontal"
+    android:gravity="center"
+    android:background="#FFFFFF"
+    android:elevation="16dp"
+    android:paddingHorizontal="16dp"
+    android:animateLayoutChanges="true">
+
+    <!-- Inicio -->
+    <LinearLayout
+        android:id="@+id/nav_inicio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="10dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:animateLayoutChanges="true">
+        
+        <ImageView
+            android:id="@+id/nav_icon_inicio"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_home"
+            app:tint="#CCCCCC" />
+            
+        <TextView
+            android:id="@+id/nav_text_inicio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Inicio"
+            android:textSize="14sp"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:layout_marginStart="8dp"
+            android:visibility="gone" />
+    </LinearLayout>
+
+    <!-- Favoritos -->
+    <LinearLayout
+        android:id="@+id/nav_favoritos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="10dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:animateLayoutChanges="true">
+        
+        <ImageView
+            android:id="@+id/nav_icon_favoritos"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_heart_outline"
+            app:tint="#CCCCCC" />
+            
+        <TextView
+            android:id="@+id/nav_text_favoritos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Favoritos"
+            android:textSize="14sp"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:layout_marginStart="8dp"
+            android:visibility="gone" />
+    </LinearLayout>
+
+    <!-- Carrito -->
+    <LinearLayout
+        android:id="@+id/nav_carrito"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="10dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:animateLayoutChanges="true">
+        
+        <ImageView
+            android:id="@+id/nav_icon_carrito"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_bag_outline"
+            app:tint="#CCCCCC" />
+            
+        <TextView
+            android:id="@+id/nav_text_carrito"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Carrito"
+            android:textSize="14sp"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:layout_marginStart="8dp"
+            android:visibility="gone" />
+    </LinearLayout>
+
+    <!-- Perfil -->
+    <LinearLayout
+        android:id="@+id/nav_perfil"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="10dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:animateLayoutChanges="true">
+        
+        <ImageView
+            android:id="@+id/nav_icon_perfil"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@android:drawable/ic_menu_myplaces"
+            app:tint="#CCCCCC" />
+            
+        <TextView
+            android:id="@+id/nav_text_perfil"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Perfil"
+            android:textSize="14sp"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:layout_marginStart="8dp"
+            android:visibility="gone" />
+    </LinearLayout>
+
+</LinearLayout>

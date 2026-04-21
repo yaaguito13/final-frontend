@@ -24,15 +24,6 @@
                 android:scaleType="centerCrop"
                 android:src="@android:drawable/ic_menu_gallery" />
 
-            <ImageView
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_alignParentEnd="true"
-                android:layout_margin="12dp"
-                android:background="@drawable/bg_logo_rect"
-                android:backgroundTint="#FFFFFF"
-                android:src="@android:drawable/ic_menu_camera"
-                android:padding="6dp"/>
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 

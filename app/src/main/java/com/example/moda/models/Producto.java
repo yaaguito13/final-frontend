@@ -4,6 +4,10 @@ import com.google.gson.annotations.SerializedName;
 
 public class Producto {
     private int id;
+    
+    @SerializedName(value = "producto_id", alternate = {"producto"})
+    private Integer productoIdReal;
+
     private String nombre;
     private double precio;
     
@@ -17,6 +21,8 @@ public class Producto {
 
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
+    
+    public int getProductoIdReal() { return productoIdReal != null ? productoIdReal : id; }
 
     public String getNombre() { return nombre; }
     public void setNombre(String nombre) { this.nombre = nombre; }

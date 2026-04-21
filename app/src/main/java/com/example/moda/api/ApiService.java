@@ -6,6 +6,9 @@ import com.example.moda.models.RegisterRequest;
 import com.example.moda.models.CategoriaResponse;
 import com.example.moda.models.MarcaResponse;
 import com.example.moda.models.ProductoResponse;
+import com.example.moda.models.Producto;
+import com.example.moda.models.FavoritoRequest;
+import com.example.moda.models.CarritoRequest;
 
 import java.util.List;
 
@@ -31,4 +34,13 @@ public interface ApiService {
 
     @GET("productos/")
     Call<ProductoResponse> getProductos();
+
+    @GET("productos/{producto_id}/")
+    Call<Producto> getProducto(@retrofit2.http.Path("producto_id") int productoId);
+
+    @POST("favoritos/")
+    Call<ResponseBody> addFavorito(@Body FavoritoRequest request);
+
+    @POST("carrito/")
+    Call<ResponseBody> addCarrito(@Body CarritoRequest request);
 }

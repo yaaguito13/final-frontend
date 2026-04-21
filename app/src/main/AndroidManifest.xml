@@ -28,6 +28,9 @@
         <activity
             android:name=".HomeActivity"
             android:exported="false" />
+        <activity
+            android:name=".ProductDetailActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

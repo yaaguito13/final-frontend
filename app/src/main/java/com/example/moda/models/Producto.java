@@ -13,6 +13,7 @@ public class Producto {
     @SerializedName("marca")
     private String marca_nombre;
     private double rating;
+    private String descripcion;
 
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
@@ -31,4 +32,7 @@ public class Producto {
 
     public double getRating() { return rating; }
     public void setRating(double rating) { this.rating = rating; }
+
+    public String getDescripcion() { return descripcion; }
+    public void setDescripcion(String descripcion) { this.descripcion = descripcion; }
 }

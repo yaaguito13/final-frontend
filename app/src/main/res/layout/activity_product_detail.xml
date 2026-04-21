@@ -1,0 +1,430 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF">
+
+    <!-- Scrollable content -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/bottomBar"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="24dp">
+
+            <!-- Product Header (Image & Icons) -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="450dp"
+                android:background="#F5F5F5">
+
+                <ImageView
+                    android:id="@+id/ivProductImageDetail"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@android:drawable/ic_menu_gallery" />
+
+                <!-- Top Icons Toolbar (Back, Share, Heart, Black circle) -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:paddingTop="32dp"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp">
+
+                    <ImageButton
+                        android:id="@+id/btnBack"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:background="@drawable/bg_round_white"
+                        android:src="@drawable/ic_arrow_back"
+                        android:padding="12dp"
+                        android:scaleType="fitCenter" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+
+                    <ImageButton
+                        android:id="@+id/btnShare"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:background="@drawable/bg_round_white"
+                        android:src="@drawable/ic_share"
+                        android:padding="12dp"
+                        android:scaleType="fitCenter"
+                        android:layout_marginEnd="8dp" />
+
+                    <ImageButton
+                        android:id="@+id/btnFavorite"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:background="@drawable/bg_round_white"
+                        android:src="@drawable/ic_heart_outline"
+                        android:padding="12dp"
+                        android:scaleType="fitCenter"
+                        android:layout_marginEnd="8dp" />
+
+                    <View
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:background="@drawable/bg_round_black"/>
+                </LinearLayout>
+            </RelativeLayout>
+
+            <!-- Product details content -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="24dp">
+
+                <!-- Brand & Rating -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <!-- Placeholder logo -->
+                    <ImageView
+                        android:id="@+id/ivBrandLogoDetail"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:background="@drawable/bg_selectable_unselected"
+                        android:src="@android:drawable/ic_menu_gallery"
+                        android:scaleType="centerCrop" />
+
+                    <TextView
+                        android:id="@+id/tvBrandNameDetail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="ZARA"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:letterSpacing="0.1"
+                        android:layout_marginStart="12dp"
+                        android:textColor="#000000" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:id="@+id/tvProductRatingDetail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_selectable_selected"
+                        android:text="4.6"
+                        android:textColor="#FFFFFF"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp"
+                        android:paddingTop="4dp"
+                        android:paddingBottom="4dp" />
+                </LinearLayout>
+
+                <!-- Title -->
+                <TextView
+                    android:id="@+id/tvProductNameDetail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Cargando..."
+                    android:textColor="#000000"
+                    android:textSize="28sp"
+                    android:textStyle="bold|italic"
+                    android:fontFamily="serif"
+                    android:layout_marginTop="24dp" />
+
+                <!-- Price -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="bottom"
+                    android:layout_marginTop="16dp">
+
+                    <TextView
+                        android:id="@+id/tvProductPriceDetail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0.00 €"
+                        android:textColor="#000000"
+                        android:textSize="32sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="IVA INCLUIDO"
+                        android:textColor="#9E9E9E"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:letterSpacing="0.1"
+                        android:layout_marginStart="8dp" />
+                </LinearLayout>
+
+                <!-- Size Selection -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="SELECCIONA TALLA"
+                    android:textColor="#9E9E9E"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:letterSpacing="0.1"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginBottom="16dp" />
+
+                <LinearLayout
+                    android:id="@+id/tallasContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <!-- Tallas added dynamically or statically -->
+                    <TextView
+                        android:id="@+id/talla_40"
+                        android:layout_width="56dp"
+                        android:layout_height="56dp"
+                        android:text="40"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:textColor="#000000"
+                        android:background="@drawable/bg_selectable_unselected"
+                        android:layout_marginEnd="8dp" />
+                    <TextView
+                        android:id="@+id/talla_41"
+                        android:layout_width="56dp"
+                        android:layout_height="56dp"
+                        android:text="41"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:textColor="#000000"
+                        android:background="@drawable/bg_selectable_unselected"
+                        android:layout_marginEnd="8dp" />
+                    <TextView
+                        android:id="@+id/talla_42"
+                        android:layout_width="56dp"
+                        android:layout_height="56dp"
+                        android:text="42"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:textColor="#000000"
+                        android:background="@drawable/bg_selectable_unselected"
+                        android:layout_marginEnd="8dp" />
+                    <TextView
+                        android:id="@+id/talla_43"
+                        android:layout_width="56dp"
+                        android:layout_height="56dp"
+                        android:text="43"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:textColor="#000000"
+                        android:background="@drawable/bg_selectable_unselected"
+                        android:layout_marginEnd="8dp" />
+                    <TextView
+                        android:id="@+id/talla_44"
+                        android:layout_width="56dp"
+                        android:layout_height="56dp"
+                        android:text="44"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:textColor="#000000"
+                        android:background="@drawable/bg_selectable_unselected" />
+                </LinearLayout>
+
+                <!-- Color Selection -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="COLOR"
+                    android:textColor="#9E9E9E"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:letterSpacing="0.1"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginBottom="16dp" />
+
+                <LinearLayout
+                    android:id="@+id/coloresContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    
+                    <TextView
+                        android:id="@+id/color_negro"
+                        android:layout_width="0dp"
+                        android:layout_height="56dp"
+                        android:layout_weight="1"
+                        android:text="Negro"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:textColor="#000000"
+                        android:background="@drawable/bg_selectable_unselected"
+                        android:layout_marginEnd="8dp" />
+
+                    <TextView
+                        android:id="@+id/color_blanco"
+                        android:layout_width="0dp"
+                        android:layout_height="56dp"
+                        android:layout_weight="1"
+                        android:text="Blanco"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:textColor="#000000"
+                        android:background="@drawable/bg_selectable_unselected"
+                        android:layout_marginEnd="8dp" />
+                        
+                    <TextView
+                        android:id="@+id/color_gris"
+                        android:layout_width="0dp"
+                        android:layout_height="56dp"
+                        android:layout_weight="1"
+                        android:text="Gris"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:textColor="#000000"
+                        android:background="@drawable/bg_selectable_unselected"
+                        android:layout_marginEnd="8dp" />
+
+                    <TextView
+                        android:id="@+id/color_azul"
+                        android:layout_width="0dp"
+                        android:layout_height="56dp"
+                        android:layout_weight="1"
+                        android:text="Azul"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:textColor="#000000"
+                        android:background="@drawable/bg_selectable_unselected" />
+                </LinearLayout>
+
+                <!-- Description -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="DESCRIPCIÓN"
+                    android:textColor="#9E9E9E"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:letterSpacing="0.1"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginBottom="16dp" />
+
+                <TextView
+                    android:id="@+id/tvProductDescriptionDetail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="..."
+                    android:textColor="#555555"
+                    android:textSize="16sp"
+                    android:lineSpacingExtra="8dp" />
+
+                <!-- Similar Products -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="PRODUCTOS SIMILARES"
+                    android:textColor="#9E9E9E"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:letterSpacing="0.1"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginBottom="16dp" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvSimilarProducts"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Bottom Action Bar -->
+    <LinearLayout
+        android:id="@+id/bottomBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:padding="24dp"
+        android:background="@android:color/transparent">
+
+        <LinearLayout
+            android:id="@+id/btnAddToCart"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_selectable_unselected"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_marginEnd="8dp">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_bag_outline" />
+            
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="AL CARRITO"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:textSize="12sp"
+                android:letterSpacing="0.1"
+                android:layout_marginStart="8dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btnBuyNow"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_selectable_selected"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_marginStart="8dp">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_check_circle"
+                app:tint="#FFFFFF" />
+            
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="COMPRAR YA"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                android:textSize="12sp"
+                android:letterSpacing="0.1"
+                android:layout_marginStart="8dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

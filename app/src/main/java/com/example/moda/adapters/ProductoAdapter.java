@@ -54,6 +54,12 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ViewHo
                 .load(imageUrl)
                 .placeholder(android.R.drawable.ic_menu_gallery)
                 .into(holder.ivProducto);
+
+        holder.itemView.setOnClickListener(v -> {
+            android.content.Intent intent = new android.content.Intent(v.getContext(), com.example.moda.ProductDetailActivity.class);
+            intent.putExtra("producto_id", producto.getId());
+            v.getContext().startActivity(intent);
+        });
     }
 
     @Override

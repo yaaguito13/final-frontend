@@ -70,4 +70,7 @@ public interface ApiService {
 
     @POST("direcciones/")
     Call<okhttp3.ResponseBody> addDireccion(@Body com.example.moda.models.DireccionRequest request);
+
+    @POST("pedidos/checkout/")
+    Call<okhttp3.ResponseBody> createPedido(@Body com.example.moda.models.PedidoRequest request);
 }

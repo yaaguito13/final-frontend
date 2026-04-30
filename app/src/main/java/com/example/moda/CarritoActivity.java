@@ -90,7 +90,14 @@ public class CarritoActivity extends AppCompatActivity {
         });
 
         btnCheckout.setOnClickListener(v -> {
-            Toast.makeText(this, "Hacia pasarela de pago...", Toast.LENGTH_SHORT).show();
+            double total = 0;
+            if (adapter.getItems() != null) {
+                for (com.example.moda.models.CarritoItem item : adapter.getItems()) {
+                    total += item.getSubtotal();
+                }
+            }
+            PagoBottomSheet sheet = PagoBottomSheet.newInstance(total, sessionUserId);
+            sheet.show(getSupportFragmentManager(), "pago");
         });
 
         cartListener = new CarritoAdapter.OnCartActionListener() {

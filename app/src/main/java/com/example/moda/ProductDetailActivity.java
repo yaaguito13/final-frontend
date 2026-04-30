@@ -108,11 +108,11 @@ public class ProductDetailActivity extends AppCompatActivity {
             añadirAFavoritos();
         });
 
-        btnAddToCart.setOnClickListener(v -> actionCartOrBuy());
-        btnBuyNow.setOnClickListener(v -> actionCartOrBuy());
+        btnAddToCart.setOnClickListener(v -> actionCartOrBuy(false));
+        btnBuyNow.setOnClickListener(v -> actionCartOrBuy(true));
     }
 
-    private void actionCartOrBuy() {
+    private void actionCartOrBuy(boolean isBuyNow) {
         if (usuarioId == -1) {
             Toast.makeText(this, "Debes iniciar sesión para comprar", Toast.LENGTH_SHORT).show();
             return;
@@ -125,7 +125,11 @@ public class ProductDetailActivity extends AppCompatActivity {
             Toast.makeText(this, "Por favor selecciona un color", Toast.LENGTH_SHORT).show();
             return;
         }
-        añadirAlCarrito();
+        if (isBuyNow) {
+            comprarYa();
+        } else {
+            añadirAlCarrito();
+        }
     }
 
     private void setupSelectors() {
@@ -260,6 +264,28 @@ public class ProductDetailActivity extends AppCompatActivity {
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 android.util.Log.e("CARRITO_ERROR", "Failure: " + t.getMessage());
                 Toast.makeText(ProductDetailActivity.this, "Error de conexión: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void comprarYa() {
+        if (currentProduct == null) return;
+        
+        CarritoRequest req = new CarritoRequest(usuarioId, productoId, 1, selectedTalla, selectedColor);
+        apiService.addCarrito(req).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.isSuccessful()) {
+                    // Open payment sheet with this product's price
+                    PagoBottomSheet sheet = PagoBottomSheet.newInstance(currentProduct.getPrecio(), usuarioId);
+                    sheet.show(getSupportFragmentManager(), "pago");
+                } else {
+                    Toast.makeText(ProductDetailActivity.this, "Error al preparar compra", Toast.LENGTH_SHORT).show();
+                }
+            }
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Toast.makeText(ProductDetailActivity.this, "Error de red", Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -7,10 +7,10 @@
 
     <style name="Theme.Moda" parent="Base.Theme.Moda" />
 
-    <!-- Splash Screen Theme -->
-    <style name="Theme.App.Starting" parent="Theme.SplashScreen">
-        <item name="windowSplashScreenAnimatedIcon">@drawable/app_logo</item>
-        <item name="windowSplashScreenBackground">#FFFFFF</item>
-        <item name="postSplashScreenTheme">@style/Theme.Moda</item>
+    <!-- Splash Screen Theme (Custom) -->
+    <style name="Theme.Moda.Splash" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:windowBackground">@drawable/bg_splash_system</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
     </style>
 </resources>

@@ -60,6 +60,7 @@
 
         <!-- Search Bar -->
         <EditText
+            android:id="@+id/etBuscarHome"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginHorizontal="16dp"
@@ -69,7 +70,9 @@
             android:textColorHint="#AAAAAA"
             android:paddingStart="48dp"
             android:drawableStart="@android:drawable/ic_menu_search"
-            android:drawablePadding="8dp" />
+            android:drawablePadding="8dp"
+            android:imeOptions="actionSearch"
+            android:inputType="text" />
 
         <View
             android:layout_width="match_parent"
@@ -115,6 +118,7 @@
                 android:textColor="#000000" />
 
             <TextView
+                android:id="@+id/tvVerTodasMarcas"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="VER TODAS"
@@ -122,7 +126,9 @@
                 android:textSize="12sp"
                 android:textStyle="bold"
                 android:layout_alignParentRight="true"
-                android:layout_centerVertical="true" />
+                android:layout_centerVertical="true"
+                android:clickable="true"
+                android:focusable="true" />
         </RelativeLayout>
 
         <androidx.recyclerview.widget.RecyclerView

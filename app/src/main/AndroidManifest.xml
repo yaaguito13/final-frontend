@@ -52,6 +52,10 @@
         <activity
             android:name=".DireccionesActivity"
             android:exported="false" />
+        <activity
+            android:name=".TodasLasMarcasActivity"
+            android:exported="false"
+            android:windowSoftInputMode="stateHidden" />
     </application>
 
 </manifest>

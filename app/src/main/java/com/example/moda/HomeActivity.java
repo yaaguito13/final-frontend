@@ -2,7 +2,11 @@ package com.example.moda;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -36,6 +40,20 @@ public class HomeActivity extends AppCompatActivity {
         findViewById(R.id.ivCart).setOnClickListener(v -> {
             Intent intent = new Intent(this, CarritoActivity.class);
             startActivity(intent);
+        });
+
+        // VER TODAS button
+        TextView tvVerTodas = findViewById(R.id.tvVerTodasMarcas);
+        tvVerTodas.setOnClickListener(v -> startActivity(new Intent(this, TodasLasMarcasActivity.class)));
+
+        // Search bar → TodasLasMarcas
+        EditText etBuscar = findViewById(R.id.etBuscarHome);
+        etBuscar.setOnEditorActionListener((v, actionId, event) -> {
+            String query = etBuscar.getText().toString().trim();
+            Intent intent = new Intent(this, TodasLasMarcasActivity.class);
+            intent.putExtra("QUERY", query);
+            startActivity(intent);
+            return true;
         });
 
         // Lanzar las 3 llamadas paralelas

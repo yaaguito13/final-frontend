@@ -125,7 +125,7 @@
             android:id="@+id/nav_icon_perfil"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:src="@android:drawable/ic_menu_myplaces"
+            android:src="@drawable/ic_person"
             app:tint="#CCCCCC" />
             
         <TextView

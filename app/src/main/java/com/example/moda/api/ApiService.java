@@ -58,4 +58,16 @@ public interface ApiService {
 
     @retrofit2.http.DELETE("carrito/{item_id}/")
     Call<ResponseBody> deleteCarrito(@retrofit2.http.Path("item_id") int itemId);
+
+    @GET("perfil/")
+    Call<com.example.moda.models.PerfilResponse> getPerfil(@retrofit2.http.Query("usuario_id") int usuarioId);
+
+    @GET("pedidos/")
+    Call<com.example.moda.models.PedidoResponse> getHistorialPedidos(@retrofit2.http.Query("usuario_id") int usuarioId);
+
+    @GET("direcciones/")
+    Call<com.example.moda.models.DireccionResponse> getDirecciones(@retrofit2.http.Query("usuario_id") int usuarioId);
+
+    @POST("direcciones/")
+    Call<okhttp3.ResponseBody> addDireccion(@Body com.example.moda.models.DireccionRequest request);
 }

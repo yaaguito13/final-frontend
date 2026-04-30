@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="24dp"
+    android:background="@drawable/bg_card_border"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <!-- Header -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_centerVertical="true">
+            
+            <TextView
+                android:id="@+id/tvDireccionTitulo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Casa"
+                android:textColor="#000000"
+                android:textSize="20sp"
+                android:textStyle="bold|italic"
+                android:fontFamily="serif" />
+                
+            <!-- Checkmark circle -->
+            <ImageView
+                android:id="@+id/ivCheck"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginStart="8dp"
+                android:src="@drawable/ic_check_circle" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+            
+            <TextView
+                android:id="@+id/tvPrincipalPill"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="PRINCIPAL"
+                android:textColor="#FFFFFF"
+                android:textSize="10sp"
+                android:textStyle="bold"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="6dp"
+                android:background="@drawable/bg_button_black"
+                android:layout_marginEnd="16dp" />
+                
+            <ImageView
+                android:id="@+id/ivDelete"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:background="@drawable/bg_selectable_unselected"
+                android:src="@android:drawable/ic_menu_delete"
+                app:tint="#888888"
+                android:padding="8dp" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tvDireccionCompleta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Calle Gran Vía, 28, 28013 Madrid"
+        android:textColor="#778899"
+        android:textSize="14sp"
+        android:layout_marginTop="16dp"
+        android:lineSpacingExtra="4dp" />
+
+</LinearLayout>

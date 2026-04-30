@@ -46,6 +46,12 @@
         <activity
             android:name=".MarcaDetailActivity"
             android:exported="false" />
+        <activity
+            android:name=".PedidosActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DireccionesActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

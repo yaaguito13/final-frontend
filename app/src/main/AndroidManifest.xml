@@ -43,6 +43,9 @@
         <activity
             android:name=".PerfilActivity"
             android:exported="false" />
+        <activity
+            android:name=".MarcaDetailActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

@@ -6,24 +6,47 @@
     android:background="#FFFFFF">
 
     <!-- HEADER -->
-    <TextView
-        android:id="@+id/tvHeaderCarrito"
+    <RelativeLayout
+        android:id="@+id/layoutHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:padding="24dp"
-        android:text="Tu Carrito"
-        android:textColor="#000000"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:fontFamily="serif" />
+        android:paddingTop="32dp"
+        android:paddingBottom="16dp"
+        android:paddingHorizontal="24dp">
+
+        <TextView
+            android:id="@+id/tvHeaderCarrito"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tu Carrito"
+            android:textColor="#000000"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:fontFamily="serif" />
+
+        <TextView
+            android:id="@+id/btnClearCart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:text="VACÍAR"
+            android:textColor="#FF5252"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:letterSpacing="0.1"
+            android:padding="8dp"
+            android:background="?attr/selectableItemBackgroundBorderless" />
+    </RelativeLayout>
         
     <View
         android:id="@+id/dividerHeader"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_below="@id/tvHeaderCarrito"
-        android:background="#E0E0E0" />
+        android:layout_height="2dp"
+        android:layout_below="@id/layoutHeader"
+        android:layout_marginHorizontal="24dp"
+        android:background="#000000" />
 
     <!-- EMPTY STATE -->
     <LinearLayout
@@ -52,15 +75,6 @@
             android:textSize="18sp"
             android:textStyle="bold" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:gravity="center"
-            android:text="¡Explora nuestras marcas y\nencuentra algo que te encante!"
-            android:textColor="#888888"
-            android:textSize="14sp" />
-
         <Button
             android:id="@+id/btnEmptyComprar"
             android:layout_width="match_parent"
@@ -70,12 +84,9 @@
             android:text="Empezar a comprar"
             android:textAllCaps="false"
             android:textColor="#FFFFFF"
-            android:textSize="16sp"
-            android:textStyle="bold"
             app:cornerRadius="12dp" />
     </LinearLayout>
 
-    <!-- FILLED STATE -->
     <RelativeLayout
         android:id="@+id/filledStateCarrito"
         android:layout_width="match_parent"
@@ -84,44 +95,89 @@
         android:layout_above="@id/bottomNavF"
         android:visibility="visible">
 
-        <!-- Lista de Productos -->
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvCarrito"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_above="@+id/layoutCheckoutParams"
-            android:clipToPadding="false"
-            android:paddingTop="8dp"
-            android:paddingBottom="16dp" />
-
-        <!-- Checkout Bottom Bar -->
+        <!-- Contenedor inferior persistente (Resumen + Botón) -->
         <LinearLayout
-            android:id="@+id/layoutCheckoutParams"
+            android:id="@+id/layoutBottomSticky"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:background="#FFFFFF"
-            android:elevation="16dp"
             android:orientation="vertical"
-            android:padding="24dp">
-            
+            android:paddingHorizontal="24dp"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
+            android:background="#FFFFFF"
+            android:elevation="0dp">
+
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Total General"
-                    android:textColor="#777777"
-                    android:textSize="16sp" />
+                    android:text="Subtotal"
+                    android:textColor="#888888"
+                    android:textSize="14sp"
+                    android:fontFamily="serif" />
                 <TextView
-                    android:id="@+id/tvTotalGeneral"
+                    android:id="@+id/tvSubtotalTotal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:text="0.00 €"
                     android:textColor="#000000"
                     android:textStyle="bold"
+                    android:textSize="14sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Envío"
+                    android:textColor="#888888"
+                    android:textSize="14sp"
+                    android:fontFamily="serif" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:text="GRATIS"
+                    android:textColor="#000000"
+                    android:textStyle="bold"
+                    android:textSize="13sp" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#DDDDDD"
+                android:layout_marginVertical="8dp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Total"
+                    android:textColor="#000000"
+                    android:textSize="20sp"
+                    android:textStyle="bold|italic"
+                    android:fontFamily="serif" />
+                <TextView
+                    android:id="@+id/tvTotalGeneral"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:text="0.00 €"
+                    android:textColor="@color/gold_total"
+                    android:textStyle="bold|italic"
+                    android:fontFamily="serif"
                     android:textSize="20sp" />
             </RelativeLayout>
 
@@ -129,15 +185,25 @@
                 android:id="@+id/btnCheckout"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
-                android:layout_marginTop="16dp"
                 android:backgroundTint="#000000"
-                android:text="Tramitar Pedido"
+                android:text="Finalizar Compra"
                 android:textAllCaps="false"
                 android:textColor="#FFFFFF"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                app:cornerRadius="12dp" />
+                app:cornerRadius="20dp" />
         </LinearLayout>
+
+        <!-- Lista de Productos (ahora ocupa el espacio restante) -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvCarrito"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/layoutBottomSticky"
+            android:clipToPadding="false"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp" />
+
     </RelativeLayout>
 
     <include

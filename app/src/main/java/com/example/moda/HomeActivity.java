@@ -67,7 +67,18 @@ public class HomeActivity extends AppCompatActivity {
         });
 
         viewModel.getMarcas().observe(this, marcas -> {
-            if (marcas != null) marcaAdapter.setMarcas(marcas);
+            if (marcas != null) {
+                marcaAdapter.setMarcas(marcas, marca -> {
+                    Intent intent = new Intent(HomeActivity.this, MarcaDetailActivity.class);
+                    intent.putExtra("MARCA_ID", marca.getId());
+                    intent.putExtra("MARCA_NOMBRE", marca.getNombre());
+                    intent.putExtra("MARCA_DESC", marca.getDescripcion());
+                    intent.putExtra("MARCA_LOGO", marca.getLogoUrl());
+                    intent.putExtra("MARCA_BANNER", marca.getImagenFondoUrl());
+                    intent.putExtra("MARCA_RATING", marca.getRating());
+                    startActivity(intent);
+                });
+            }
         });
 
         viewModel.getProductos().observe(this, productos -> {

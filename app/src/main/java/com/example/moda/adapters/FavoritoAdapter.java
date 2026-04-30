@@ -68,6 +68,13 @@ public class FavoritoAdapter extends RecyclerView.Adapter<FavoritoAdapter.ViewHo
                 .load(imageUrl)
                 .placeholder(android.R.drawable.ic_menu_gallery)
                 .into(holder.ivImage);
+ 
+        // Navegar a Detalle al pulsar sobre el producto
+        holder.itemView.setOnClickListener(v -> {
+            android.content.Intent intent = new android.content.Intent(v.getContext(), com.example.moda.ProductDetailActivity.class);
+            intent.putExtra("producto_id", producto.getProductoIdReal());
+            v.getContext().startActivity(intent);
+        });
 
         holder.btnDelete.setOnClickListener(v -> {
             if (deleteClickListener != null) {

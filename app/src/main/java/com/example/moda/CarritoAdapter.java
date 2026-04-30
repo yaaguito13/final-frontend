@@ -66,11 +66,11 @@ public class CarritoAdapter extends RecyclerView.Adapter<CarritoAdapter.CarritoV
     public void onBindViewHolder(@NonNull CarritoViewHolder holder, int position) {
         CarritoItem item = carritoList.get(position);
 
-        if (item.getProducto() != null) {
-            holder.tvName.setText(item.getProducto().getNombre());
-            holder.tvBrand.setText(item.getProducto().getMarcaNombre());
+        if (item.getNombre() != null) {
+            holder.tvName.setText(item.getNombre());
+            holder.tvBrand.setText(""); // El backend no devuelve la marca en el carrito
 
-            String imgUrl = item.getProducto().getImagenUrl();
+            String imgUrl = item.getImagen();
             if (imgUrl != null) {
                 if (imgUrl.contains("127.0.0.1") || imgUrl.contains("localhost")) {
                     imgUrl = imgUrl.replace("127.0.0.1", "10.0.2.2").replace("localhost", "10.0.2.2");
@@ -92,7 +92,8 @@ public class CarritoAdapter extends RecyclerView.Adapter<CarritoAdapter.CarritoV
         });
 
         holder.btnDelete.setOnClickListener(v -> {
-            if (listener != null) listener.onDeleteItem(item, position);
+            android.util.Log.d("CART_ADAPTER", "Delete clicked for item id: " + item.getId());
+            if (listener != null) listener.onDeleteItem(item, holder.getAdapterPosition());
         });
     }
 

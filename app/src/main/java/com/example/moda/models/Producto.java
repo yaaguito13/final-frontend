@@ -16,6 +16,10 @@ public class Producto {
     
     @SerializedName("marca")
     private String marca_nombre;
+
+    @SerializedName("marca_id")
+    private Integer marcaId;
+    
     private double rating;
     private String descripcion;
 
@@ -34,6 +38,8 @@ public class Producto {
     public void setImagenUrl(String imagen_url) { this.imagen_url = imagen_url; }
 
     public String getMarcaNombre() { return marca_nombre; }
+    public Integer getMarcaId() { return marcaId; }
+    public void setMarcaId(Integer marcaId) { this.marcaId = marcaId; }
     public void setMarcaNombre(String marca_nombre) { this.marca_nombre = marca_nombre; }
 
     public double getRating() { return rating; }

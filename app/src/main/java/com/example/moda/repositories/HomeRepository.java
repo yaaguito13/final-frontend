@@ -27,6 +27,6 @@ public class HomeRepository {
     }
 
     public void getProductos(Callback<ProductoResponse> callback) {
-        apiService.getProductos().enqueue(callback);
+        apiService.getProductos(null).enqueue(callback);
     }
 }

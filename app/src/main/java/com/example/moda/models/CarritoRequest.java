@@ -3,10 +3,10 @@ package com.example.moda.models;
 import com.google.gson.annotations.SerializedName;
 
 public class CarritoRequest {
-    @SerializedName("usuario_id")
+    @SerializedName(value = "usuario_id", alternate = {"usuario", "user", "user_id"})
     private int usuarioId;
 
-    @SerializedName("producto_id")
+    @SerializedName(value = "producto_id", alternate = {"producto", "product", "product_id"})
     private int productoId;
 
     private int cantidad;

@@ -18,9 +18,15 @@ import java.util.List;
 
 public class MarcaAdapter extends RecyclerView.Adapter<MarcaAdapter.ViewHolder> {
     private List<Marca> marcas = new ArrayList<>();
+    private OnMarcaClickListener listener;
 
-    public void setMarcas(List<Marca> marcas) {
+    public interface OnMarcaClickListener {
+        void onMarcaClick(Marca marca);
+    }
+
+    public void setMarcas(List<Marca> marcas, OnMarcaClickListener listener) {
         this.marcas = marcas;
+        this.listener = listener;
         notifyDataSetChanged();
     }
 
@@ -54,6 +60,10 @@ public class MarcaAdapter extends RecyclerView.Adapter<MarcaAdapter.ViewHolder> 
                 .load(imageUrl)
                 .placeholder(android.R.drawable.ic_menu_gallery)
                 .into(holder.ivLogo);
+
+        holder.itemView.setOnClickListener(v -> {
+            if (listener != null) listener.onMarcaClick(marca);
+        });
     }
 
     @Override

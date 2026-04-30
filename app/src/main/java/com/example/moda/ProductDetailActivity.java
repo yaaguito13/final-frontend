@@ -41,6 +41,7 @@ public class ProductDetailActivity extends AppCompatActivity {
 
     private String selectedTalla = "";
     private String selectedColor = "";
+    private Producto currentProduct;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -160,7 +161,8 @@ public class ProductDetailActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<Producto> call, Response<Producto> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    Producto p = response.body();
+                    currentProduct = response.body();
+                    Producto p = currentProduct;
                     tvProductName.setText(p.getNombre());
                     tvProductPrice.setText(String.format("%.2f €", p.getPrecio()));
                     tvBrandName.setText(p.getMarcaNombre());
@@ -195,6 +197,12 @@ public class ProductDetailActivity extends AppCompatActivity {
     }
 
     private void añadirAFavoritos() {
+        if (usuarioId == -1) {
+            Toast.makeText(this, "Por favor, inicia sesión para añadir a favoritos", Toast.LENGTH_LONG).show();
+            return;
+        }
+        if (currentProduct == null) return;
+        
         FavoritoRequest req = new FavoritoRequest(usuarioId, productoId);
         apiService.addFavorito(req).enqueue(new Callback<ResponseBody>() {
             @Override
@@ -215,19 +223,43 @@ public class ProductDetailActivity extends AppCompatActivity {
     }
 
     private void añadirAlCarrito() {
-        CarritoRequest req = new CarritoRequest(usuarioId, productoId, 1, selectedTalla, selectedColor);
+        if (usuarioId == -1) {
+            Toast.makeText(this, "Por favor, inicia sesión para añadir al carrito", Toast.LENGTH_LONG).show();
+            // Opcional: Redirigir a LoginActivity
+            return;
+        }
+
+        if (currentProduct == null) {
+            Toast.makeText(this, "Datos del producto no cargados", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        int idToSend = productoId;
+        String nameToSend = currentProduct.getNombre();
+        
+        // Diagnóstico temporal para el usuario
+        Toast.makeText(this, "Enviando: [" + idToSend + "] " + nameToSend, Toast.LENGTH_SHORT).show();
+
+        CarritoRequest req = new CarritoRequest(usuarioId, idToSend, 1, selectedTalla, selectedColor);
         apiService.addCarrito(req).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.isSuccessful()) {
                     Toast.makeText(ProductDetailActivity.this, "Añadido al carrito con éxito", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(ProductDetailActivity.this, "Error al añadir al carrito", Toast.LENGTH_SHORT).show();
+                    try {
+                        String errorBody = response.errorBody().string();
+                        android.util.Log.e("CARRITO_ERROR", "Code: " + response.code() + " | Body: " + errorBody);
+                        Toast.makeText(ProductDetailActivity.this, "Error backend: " + response.code(), Toast.LENGTH_SHORT).show();
+                    } catch (Exception e) {
+                        Toast.makeText(ProductDetailActivity.this, "Error inesperado al añadir", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Toast.makeText(ProductDetailActivity.this, "Error de conexión", Toast.LENGTH_SHORT).show();
+                android.util.Log.e("CARRITO_ERROR", "Failure: " + t.getMessage());
+                Toast.makeText(ProductDetailActivity.this, "Error de conexión: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }

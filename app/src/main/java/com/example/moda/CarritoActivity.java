@@ -36,7 +36,7 @@ public class CarritoActivity extends AppCompatActivity {
     private LinearLayout emptyStateCarrito;
     private RelativeLayout filledStateCarrito;
     private RecyclerView rvCarrito;
-    private TextView tvTotalGeneral;
+    private TextView tvTotalGeneral, tvSubtotalTotal;
     private Button btnEmptyComprar, btnCheckout;
 
     private ApiService apiService;
@@ -56,19 +56,34 @@ public class CarritoActivity extends AppCompatActivity {
         filledStateCarrito = findViewById(R.id.filledStateCarrito);
         rvCarrito = findViewById(R.id.rvCarrito);
         tvTotalGeneral = findViewById(R.id.tvTotalGeneral);
+        tvSubtotalTotal = findViewById(R.id.tvSubtotalTotal);
         btnEmptyComprar = findViewById(R.id.btnEmptyComprar);
         btnCheckout = findViewById(R.id.btnCheckout);
+        TextView btnClearCart = findViewById(R.id.btnClearCart);
 
         apiService = ApiClient.getClient().create(ApiService.class);
 
-        SharedPreferences prefs = getSharedPreferences("AppSession", Context.MODE_PRIVATE);
-        sessionUserId = prefs.getInt("USER_ID", 1);
+        com.example.moda.utils.SessionManager sessionManager = new com.example.moda.utils.SessionManager(this);
+        sessionUserId = sessionManager.getUserId();
 
         rvCarrito.setLayoutManager(new LinearLayoutManager(this));
         adapter = new CarritoAdapter();
         rvCarrito.setAdapter(adapter);
 
         // Actions
+        btnClearCart.setOnClickListener(v -> {
+            if (adapter.getItemCount() > 0) {
+                new AlertDialog.Builder(this)
+                        .setTitle("Vaciar Carrito")
+                        .setMessage("¿Estás seguro de que quieres eliminar TODOS los productos?")
+                        .setPositiveButton("Sí, vaciar", (dialog, which) -> vaciarCarrito())
+                        .setNegativeButton("No", null)
+                        .show();
+            } else {
+                Toast.makeText(this, "El carrito ya está vacío", Toast.LENGTH_SHORT).show();
+            }
+        });
+
         btnEmptyComprar.setOnClickListener(v -> {
             // Ir a Inicio simulando clic en la tab
             findViewById(R.id.nav_inicio).performClick();
@@ -106,6 +121,8 @@ public class CarritoActivity extends AppCompatActivity {
 
     private void updateUI() {
         List<CarritoItem> items = adapter.getItems();
+        Log.d("CARRITO_TOTAL", "Actualizando UI con " + (items != null ? items.size() : 0) + " items");
+        
         if (items == null || items.isEmpty()) {
             emptyStateCarrito.setVisibility(View.VISIBLE);
             filledStateCarrito.setVisibility(View.GONE);
@@ -113,15 +130,27 @@ public class CarritoActivity extends AppCompatActivity {
             emptyStateCarrito.setVisibility(View.GONE);
             filledStateCarrito.setVisibility(View.VISIBLE);
             
-            double total = 0.0;
+            double sumTotal = 0.0;
             for (CarritoItem item : items) {
-                total += item.getSubtotal();
+                double sub = item.getSubtotal();
+                Log.d("CARRITO_TOTAL", "Item: " + (item.getNombre() != null ? item.getNombre() : "null") + " | Subtotal: " + sub);
+                sumTotal += sub;
             }
-            tvTotalGeneral.setText(String.format("%.2f €", total));
+            
+            tvSubtotalTotal.setText(String.format("%.2f €", sumTotal));
+            tvTotalGeneral.setText(String.format("%.2f €", sumTotal));
+            Log.d("CARRITO_TOTAL", "Total calculado final: " + sumTotal);
         }
     }
 
     private void cargarCarrito() {
+        Log.d("CARRITO", "Cargando carrito para usuario: " + sessionUserId);
+        if (sessionUserId == -1) {
+            adapter.setCarrito(new ArrayList<>(), cartListener);
+            updateUI();
+            return;
+        }
+
         apiService.getCarrito(sessionUserId).enqueue(new Callback<CarritoResponse>() {
             @Override
             public void onResponse(Call<CarritoResponse> call, Response<CarritoResponse> response) {
@@ -184,19 +213,47 @@ public class CarritoActivity extends AppCompatActivity {
                             if(response.isSuccessful()){
                                 adapter.removeItem(position);
                                 updateUI();
-                                Toast.makeText(CarritoActivity.this, "Eliminado", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(CarritoActivity.this, "Producto eliminado", Toast.LENGTH_SHORT).show();
                             } else {
-                                Toast.makeText(CarritoActivity.this, "Error al eliminar", Toast.LENGTH_SHORT).show();
+                                try {
+                                    String errorBody = response.errorBody() != null ? response.errorBody().string() : "Error " + response.code();
+                                    Log.e("CARRITO_DELETE", "Error: " + errorBody);
+                                    Toast.makeText(CarritoActivity.this, "Error backend: " + response.code(), Toast.LENGTH_SHORT).show();
+                                } catch (Exception e) {
+                                    Toast.makeText(CarritoActivity.this, "Error al eliminar", Toast.LENGTH_SHORT).show();
+                                }
                             }
                         }
-
+ 
                         @Override
                         public void onFailure(Call<ResponseBody> call, Throwable t) {
+                            Log.e("CARRITO_DELETE", "Failure: " + t.getMessage());
                             Toast.makeText(CarritoActivity.this, "Error de red", Toast.LENGTH_SHORT).show();
                         }
                     });
                 })
                 .setNegativeButton("No", null)
                 .show();
+    }
+ 
+    private void vaciarCarrito() {
+        List<CarritoItem> items = new ArrayList<>(adapter.getItems());
+        if (items.isEmpty()) return;
+
+        Toast.makeText(this, "Vaciando carrito...", Toast.LENGTH_SHORT).show();
+        for (CarritoItem item : items) {
+            apiService.deleteCarrito(item.getId()).enqueue(new Callback<ResponseBody>() {
+                @Override
+                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                    // Ignoramos errores individuales para seguir vaciando, 
+                    // o cargamos de nuevo al final
+                }
+                @Override
+                public void onFailure(Call<ResponseBody> call, Throwable t) {}
+            });
+        }
+        // Limpiamos localmente para feedback instantáneo
+        adapter.setCarrito(new ArrayList<>(), cartListener);
+        updateUI();
     }
 }

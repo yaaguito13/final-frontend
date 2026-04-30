@@ -3,10 +3,18 @@ package com.example.moda.models;
 import com.google.gson.annotations.SerializedName;
 
 public class CarritoItem {
+    @SerializedName(value = "id", alternate = {"pk", "item_id", "carrito_id"})
     private int id; // ID of the row in the cart table
     
-    // Asumimos que el backend Serializa el objeto Producto entero para darnos info visual (nombre, precio, foto)
-    private Producto producto;
+    @SerializedName("producto_id")
+    private int productoId;
+    
+    private String nombre;
+    
+    @SerializedName("precio_unitario")
+    private double precioUnitario;
+    
+    private String imagen;
     
     private int cantidad;
     private String talla;
@@ -15,8 +23,17 @@ public class CarritoItem {
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
 
-    public Producto getProducto() { return producto; }
-    public void setProducto(Producto producto) { this.producto = producto; }
+    public int getProductoId() { return productoId; }
+    public void setProductoId(int productoId) { this.productoId = productoId; }
+
+    public String getNombre() { return nombre; }
+    public void setNombre(String nombre) { this.nombre = nombre; }
+
+    public double getPrecioUnitario() { return precioUnitario; }
+    public void setPrecioUnitario(double precioUnitario) { this.precioUnitario = precioUnitario; }
+
+    public String getImagen() { return imagen; }
+    public void setImagen(String imagen) { this.imagen = imagen; }
 
     public int getCantidad() { return cantidad; }
     public void setCantidad(int cantidad) { this.cantidad = cantidad; }
@@ -27,11 +44,7 @@ public class CarritoItem {
     public String getColor() { return color != null ? color : ""; }
     public void setColor(String color) { this.color = color; }
     
-    // Método para calcular subtotal localmente independientemente de si el backend lo da o no
     public double getSubtotal() {
-        if (producto != null) {
-            return producto.getPrecio() * cantidad;
-        }
-        return 0.0;
+        return precioUnitario * cantidad;
     }
 }

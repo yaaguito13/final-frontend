@@ -26,7 +26,7 @@ public class HomeRepository {
         apiService.getMarcas().enqueue(callback);
     }
 
-    public void getProductos(Callback<ProductoResponse> callback) {
-        apiService.getProductos(null).enqueue(callback);
+    public void getProductos(Integer marcaId, Integer categoriaId, Callback<ProductoResponse> callback) {
+        apiService.getProductos(marcaId, categoriaId).enqueue(callback);
     }
 }

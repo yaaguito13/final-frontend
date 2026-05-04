@@ -56,6 +56,10 @@ public class FavoritosActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
+        findViewById(R.id.tvToggleMarcas).setOnClickListener(v -> {
+            Toast.makeText(this, "Próximamente", Toast.LENGTH_SHORT).show();
+        });
+
         if (usuarioId != -1) {
             cargarFavoritos();
         } else {

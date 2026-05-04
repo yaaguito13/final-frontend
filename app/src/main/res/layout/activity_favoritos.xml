@@ -64,6 +64,7 @@
         android:padding="4dp">
 
         <TextView
+            android:id="@+id/tvToggleProductos"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -75,6 +76,7 @@
             android:background="@drawable/bg_selectable_selected"/>
 
         <TextView
+            android:id="@+id/tvToggleMarcas"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"

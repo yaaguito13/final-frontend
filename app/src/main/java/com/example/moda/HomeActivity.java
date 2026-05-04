@@ -81,7 +81,15 @@ public class HomeActivity extends AppCompatActivity {
 
     private void setupObservers() {
         viewModel.getCategorias().observe(this, categorias -> {
-            if (categorias != null) categoriaAdapter.setCategorias(categorias);
+            if (categorias != null) {
+                categoriaAdapter.setCategorias(categorias, categoria -> {
+                    Intent intent = new Intent(HomeActivity.this, CategoriaDetailActivity.class);
+                    intent.putExtra("CATEGORIA_ID", categoria.getId());
+                    intent.putExtra("CATEGORIA_NOMBRE", categoria.getNombre());
+                    intent.putExtra("CATEGORIA_IMAGEN", categoria.getImagenUrl());
+                    startActivity(intent);
+                });
+            }
         });
 
         viewModel.getMarcas().observe(this, marcas -> {

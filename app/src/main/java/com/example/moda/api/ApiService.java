@@ -33,7 +33,7 @@ public interface ApiService {
     Call<MarcaResponse> getMarcas();
 
     @GET("productos/")
-    Call<ProductoResponse> getProductos(@retrofit2.http.Query("marca_id") Integer marcaId);
+    Call<ProductoResponse> getProductos(@retrofit2.http.Query("marca_id") Integer marcaId, @retrofit2.http.Query("categoria_id") Integer categoriaId);
 
     @GET("productos/{producto_id}/")
     Call<Producto> getProducto(@retrofit2.http.Path("producto_id") int productoId);

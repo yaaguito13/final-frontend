@@ -84,7 +84,7 @@ public class HomeViewModel extends ViewModel {
     }
 
     private void cargarProductos() {
-        repository.getProductos(new Callback<ProductoResponse>() {
+        repository.getProductos(null, null, new Callback<ProductoResponse>() {
             @Override
             public void onResponse(Call<ProductoResponse> call, Response<ProductoResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {

@@ -5,10 +5,10 @@ import com.google.gson.annotations.SerializedName;
 public class Marca {
     private int id;
     private String nombre;
-    private String logo_url;
     
     @SerializedName("imagen")
-    private String imagen_fondo_url;
+    private String imagen; // Campo único para el backend
+    
     private String descripcion;
     private double rating;
 
@@ -18,11 +18,9 @@ public class Marca {
     public String getNombre() { return nombre; }
     public void setNombre(String nombre) { this.nombre = nombre; }
 
-    public String getLogoUrl() { return logo_url; }
-    public void setLogoUrl(String logo_url) { this.logo_url = logo_url; }
-
-    public String getImagenFondoUrl() { return imagen_fondo_url; }
-    public void setImagenFondoUrl(String imagen_fondo_url) { this.imagen_fondo_url = imagen_fondo_url; }
+    // Ambos métodos devuelven la misma imagen del servidor
+    public String getLogoUrl() { return imagen; }
+    public String getImagenFondoUrl() { return imagen; }
 
     public String getDescripcion() { return descripcion; }
     public void setDescripcion(String descripcion) { this.descripcion = descripcion; }

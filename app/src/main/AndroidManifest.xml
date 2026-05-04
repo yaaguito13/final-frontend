@@ -62,6 +62,9 @@
         <activity
             android:name=".CompraExitosaActivity"
             android:exported="false" />
+        <activity
+            android:name=".CategoriaDetailActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

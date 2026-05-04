@@ -81,6 +81,11 @@ public class MarcaDetailActivity extends AppCompatActivity {
             startActivity(new Intent(this, CarritoActivity.class));
         });
 
+        // Favoritos de Marca (Deshabilitado por ahora)
+        btnFavorite.setOnClickListener(v -> {
+            Toast.makeText(this, "Próximamente", Toast.LENGTH_SHORT).show();
+        });
+
         NavigationUtils.setupBottomNav(this, -1); // No highlight in brand detail usually
 
         // Cargar productos
@@ -98,7 +103,7 @@ public class MarcaDetailActivity extends AppCompatActivity {
         // Obtenemos el nombre de la marca que pasamos por Intent para filtrar localmente
         String nombreMarcaBusqueda = getIntent().getStringExtra("MARCA_NOMBRE");
 
-        apiService.getProductos(null).enqueue(new Callback<ProductoResponse>() {
+        apiService.getProductos(marcaId, null).enqueue(new Callback<ProductoResponse>() {
             @Override
             public void onResponse(Call<ProductoResponse> call, Response<ProductoResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {

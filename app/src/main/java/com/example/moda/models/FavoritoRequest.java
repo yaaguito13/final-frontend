@@ -7,11 +7,20 @@ public class FavoritoRequest {
     private int usuarioId;
 
     @SerializedName("producto_id")
-    private int productoId;
+    private Integer productoId;
 
-    public FavoritoRequest(int usuarioId, int productoId) {
+    @SerializedName("marca_id")
+    private Integer marcaId;
+
+    public FavoritoRequest(int usuarioId, Integer productoId) {
         this.usuarioId = usuarioId;
         this.productoId = productoId;
+    }
+
+    public FavoritoRequest(int usuarioId, Integer productoId, Integer marcaId) {
+        this.usuarioId = usuarioId;
+        this.productoId = productoId;
+        this.marcaId = marcaId;
     }
 
     public int getUsuarioId() {
@@ -22,11 +31,19 @@ public class FavoritoRequest {
         this.usuarioId = usuarioId;
     }
 
-    public int getProductoId() {
+    public Integer getProductoId() {
         return productoId;
     }
 
-    public void setProductoId(int productoId) {
+    public void setProductoId(Integer productoId) {
         this.productoId = productoId;
+    }
+
+    public Integer getMarcaId() {
+        return marcaId;
+    }
+
+    public void setMarcaId(Integer marcaId) {
+        this.marcaId = marcaId;
     }
 }

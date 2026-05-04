@@ -1,6 +1,7 @@
 package com.example.moda.models;
 
 import com.google.gson.annotations.SerializedName;
+import java.util.List;
 
 public class Producto {
     private int id;
@@ -19,6 +20,9 @@ public class Producto {
 
     @SerializedName("marca_id")
     private Integer marcaId;
+
+    @SerializedName("categorias")
+    private List<String> categoriasNombres;
     
     private double rating;
     private String descripcion;
@@ -38,9 +42,13 @@ public class Producto {
     public void setImagenUrl(String imagen_url) { this.imagen_url = imagen_url; }
 
     public String getMarcaNombre() { return marca_nombre; }
+    public void setMarcaNombre(String marca_nombre) { this.marca_nombre = marca_nombre; }
+    
     public Integer getMarcaId() { return marcaId; }
     public void setMarcaId(Integer marcaId) { this.marcaId = marcaId; }
-    public void setMarcaNombre(String marca_nombre) { this.marca_nombre = marca_nombre; }
+
+    public List<String> getCategoriasNombres() { return categoriasNombres; }
+    public void setCategoriasNombres(List<String> categorias) { this.categoriasNombres = categorias; }
 
     public double getRating() { return rating; }
     public void setRating(double rating) { this.rating = rating; }

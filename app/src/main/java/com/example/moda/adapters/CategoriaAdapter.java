@@ -18,9 +18,15 @@ import java.util.List;
 
 public class CategoriaAdapter extends RecyclerView.Adapter<CategoriaAdapter.ViewHolder> {
     private List<Categoria> categorias = new ArrayList<>();
+    private OnCategoriaClickListener listener;
 
-    public void setCategorias(List<Categoria> categorias) {
+    public interface OnCategoriaClickListener {
+        void onCategoriaClick(Categoria categoria);
+    }
+
+    public void setCategorias(List<Categoria> categorias, OnCategoriaClickListener listener) {
         this.categorias = categorias;
+        this.listener = listener;
         notifyDataSetChanged();
     }
 
@@ -52,6 +58,12 @@ public class CategoriaAdapter extends RecyclerView.Adapter<CategoriaAdapter.View
                 .placeholder(android.R.drawable.ic_menu_gallery)
                 .error(android.R.drawable.ic_menu_report_image)
                 .into(holder.ivIcon);
+
+        holder.itemView.setOnClickListener(v -> {
+            if (listener != null) {
+                listener.onCategoriaClick(categoria);
+            }
+        });
     }
 
     @Override
